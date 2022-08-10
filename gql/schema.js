@@ -1,0 +1,58 @@
+// Tipos que va a utilizar graphQL
+// type -> Lo que va a devover cuando haga la peticion y nos pidan un usuario 
+
+// En graphQL es el cliente el que decide que datos le va a mandar el servidor de 
+// todos los que tiene disponible
+
+// Query que sirven para obtener datos
+// Mutations -> Para enviar datos al servidor y crear un usuario
+
+const { gql } = require('apollo-server');
+
+
+const typeDefs = gql`
+     type User { # En el tipo se definen todos los datos que puede devolver la peticion
+          id: ID
+          name: String
+          username: String
+          email: String
+          siteWeb: String
+          description: String
+          password: String
+          avatar: String
+          createAt: String
+     }
+     type Token {
+          token: String
+     }
+
+     # Siempre se intenta poder el tipo y despues en input para saber lo que le vamos a mandar
+     # Datos que queremos que nos lleguen para poder realizar dicha accion
+
+     # TIPOS DE INPUTS
+     input UserInput {
+          name: String! 
+          username: String!
+          email: String!
+          password: String!
+     }
+     input LoginInput {
+          email: String!
+          password: String!
+     }
+
+     # QUERIES Y MUTATIONS
+
+     type Query {
+          # User 
+          getUser(id: ID, username: String): User
+     }
+
+     type Mutation {
+          #User
+          register(input: UserInput): User
+          login(input: LoginInput): Token
+     }
+`;
+
+module.exports = typeDefs;
