@@ -11,6 +11,8 @@ const { gql } = require('apollo-server');
 
 
 const typeDefs = gql`
+     scalar FileUpload
+
      type User { # En el tipo se definen todos los datos que puede devolver la peticion
           id: ID
           name: String
@@ -24,6 +26,11 @@ const typeDefs = gql`
      }
      type Token {
           token: String
+     }
+
+     type UpdateAvatar {
+          status: Boolean
+          urlAvatar: String
      }
 
      # Siempre se intenta poder el tipo y despues en input para saber lo que le vamos a mandar
@@ -52,6 +59,8 @@ const typeDefs = gql`
           #User
           register(input: UserInput): User
           login(input: LoginInput): Token
+     # Para actualizar el avatar del usuario
+          updateAvatar(file: FileUpload!): UpdateAvatar #FileUpload ya esta definido en gql pero hay que traerlo
      }
 `;
 

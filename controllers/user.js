@@ -22,7 +22,7 @@ function createToken(user, SECRET_KEY, expiresIn) {
 async function getUser(id, username) {
 
      let user = null;
-     
+
      if (id) user = await User.findById(id);
      if (username) user = await User.findOne({ username });
      if (!user) throw new Error('El usuario no existe');
@@ -82,8 +82,14 @@ async function login(input) {
 
 }
 
+async function updateAvatar(file) {
+     console.log(file);
+     return null;
+}
+
 module.exports = {
      register,
      getUser,
      login,
+     updateAvatar,
 };
