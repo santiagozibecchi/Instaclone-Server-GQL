@@ -90,6 +90,8 @@ async function updateAvatar(file) {
      const imageName = `avatar/avt.${extension}`;
      const fileData = createReadStream();
 
+     console.log(imageName);
+
 
      try {
 

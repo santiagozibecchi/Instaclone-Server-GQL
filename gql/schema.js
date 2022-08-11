@@ -11,6 +11,7 @@ const { gql } = require('apollo-server');
 
 
 const typeDefs = gql`
+     scalar Upload
 
      type User { # En el tipo se definen todos los datos que puede devolver la peticion
           id: ID

@@ -1,6 +1,8 @@
-const userController = require('../controllers/user')
+const userController = require('../controllers/user');
+const GraphQLUpload = require('graphql-upload/GraphQLUpload.js');
 
 const resolvers = {
+     Upload: GraphQLUpload,
 
      Query: {
           // User
