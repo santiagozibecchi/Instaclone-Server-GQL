@@ -10,10 +10,11 @@ const resolvers = {
      },
 
      Mutation: {
-          // User
+          // User - El tercer parametro es el contexto -> viene el token desde el header
           register: (_, { input }) => userController.register(input),
           login: (_, { input }) => userController.login(input),
-          updateAvatar: (_, { file }) => userController.updateAvatar(file)
+          // ctx -> Objeto user
+          updateAvatar: (_, { file }, ctx) => userController.updateAvatar(file, ctx),
      },
 
 };

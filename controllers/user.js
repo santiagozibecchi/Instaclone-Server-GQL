@@ -83,7 +83,10 @@ async function login(input) {
 
 }
 
-async function updateAvatar(file) {
+async function updateAvatar(file, ctx) {
+
+     // Vamos a pasar el id por el HEADER
+     // Para esto accedemos al token 
 
      const { createReadStream, mimetype } = await file;
      const extension = mimetype.split('/')[1];
@@ -91,7 +94,6 @@ async function updateAvatar(file) {
      const fileData = createReadStream();
 
      console.log(imageName);
-
 
      try {
 
@@ -106,6 +108,8 @@ async function updateAvatar(file) {
           }
      }
 
+     console.log('Hola mundo')
+     console.log(ctx);
 
      return null;
 }

@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
 const express = require('express');
@@ -24,6 +25,34 @@ async function server() {
      const serverApollo = new ApolloServer({
           typeDefs,
           resolvers,
+          csrfPrevention: true,
+          cache: 'bounded',
+          // Contecto de la peticion => context es un obj (headers) que contiene req
+          context: ({ req }) => {
+               console.log(req.headers.authorization);
+               const token = req.headers.authorization;
+
+               if (token) {
+
+                    try {
+
+                         const user = jwt.verify(
+                              token.replace('Bearer', ' '),
+                              process.env.SECRET_KEY
+                         );
+
+                         return {
+                              user
+                         }
+
+                    } catch (error) {
+                         console.log('### ERROR ###');
+                         console.log(error);
+                         throw new Error("token invalido")
+                    }
+
+               }
+          }
      });
 
      await serverApollo.start();
