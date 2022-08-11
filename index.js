@@ -25,11 +25,11 @@ async function server() {
      const serverApollo = new ApolloServer({
           typeDefs,
           resolvers,
-          csrfPrevention: true,
+          csrfPrevention: false,
           cache: 'bounded',
           // Contecto de la peticion => context es un obj (headers) que contiene req
           context: ({ req }) => {
-               console.log(req.headers.authorization);
+               // console.log(req.headers.authorization);
                const token = req.headers.authorization;
 
                if (token) {
@@ -37,7 +37,7 @@ async function server() {
                     try {
 
                          const user = jwt.verify(
-                              token.replace('Bearer', ' '),
+                              token.replace('Bearer ', ''),
                               process.env.SECRET_KEY
                          );
 

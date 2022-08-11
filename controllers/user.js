@@ -88,27 +88,27 @@ async function updateAvatar(file, ctx) {
      // Vamos a pasar el id por el HEADER
      // Para esto accedemos al token 
 
-     const { createReadStream, mimetype } = await file;
-     const extension = mimetype.split('/')[1];
-     const imageName = `avatar/avt.${extension}`;
-     const fileData = createReadStream();
+     // const { createReadStream, mimetype } = await file;
+     // const extension = mimetype.split('/')[1];
+     // const imageName = `avatar/avt.${extension}`;
+     // const fileData = createReadStream();
 
-     console.log(imageName);
+     // console.log(imageName);
 
-     try {
+     // try {
 
-          const result = await awsUploadImage(fileData, imageName);
+     //      const result = await awsUploadImage(fileData, imageName);
 
-          console.log(result);
+     //      console.log(result);
 
-     } catch (error) {
-          return {
-               status: false,
-               urlAvatar: null
-          }
-     }
+     // } catch (error) {
+     //      return {
+     //           status: false,
+     //           urlAvatar: null
+     //      }
+     // }
 
-     console.log('Hola mundo')
+     console.log('Ejecutando updateAvatar')
      console.log(ctx);
 
      return null;
