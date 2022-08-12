@@ -85,33 +85,36 @@ async function login(input) {
 
 async function updateAvatar(file, ctx) {
 
+     // Extraer el id del usuario para utilizarlo para guardar imgs
+     const { id } = ctx.user
+
      // Vamos a pasar el id por el HEADER
      // Para esto accedemos al token 
 
-     // const { createReadStream, mimetype } = await file;
-     // const extension = mimetype.split('/')[1];
-     // const imageName = `avatar/avt.${extension}`;
-     // const fileData = createReadStream();
+     const { createReadStream, mimetype } = await file;
+     const extension = mimetype.split('/')[1];
+     const imageName = `avatar/${id}.${extension}`;
+     const fileData = createReadStream();
 
-     // console.log(imageName);
+     console.log(imageName);
 
-     // try {
+     try {
 
-     //      const result = await awsUploadImage(fileData, imageName);
+          const result = await awsUploadImage(fileData, imageName);
 
-     //      console.log(result);
+          // console.log(result);
+          return {
+               status: true,
+               urlAvatar: result,
+          }
 
-     // } catch (error) {
-     //      return {
-     //           status: false,
-     //           urlAvatar: null
-     //      }
-     // }
+     } catch (error) {
+          return {
+               status: false,
+               urlAvatar: null
+          }
+     }
 
-     console.log('Ejecutando updateAvatar')
-     console.log(ctx);
-
-     return null;
 }
 
 module.exports = {
