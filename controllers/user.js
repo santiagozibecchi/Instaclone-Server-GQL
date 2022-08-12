@@ -123,6 +123,8 @@ async function deleteAvatar(ctx) {
 
      try {
 
+          // La peticion llega a este punto y la ejecuta
+          // cambiando el estado del avatar a un string vacio.
           await User.findByIdAndUpdate(id, { avatar: '' });
           return true;
 
