@@ -101,8 +101,9 @@ async function updateAvatar(file, ctx) {
      try {
 
           const result = await awsUploadImage(fileData, imageName);
+          await User.findByIdAndUpdate(id, { avatar: result });
 
-          // console.log(result);
+          // console.log(result); -> https://instaclone-react-gql.s3.amazonaws.com/avatar/62f186e57671ab93f5d81df8.png
           return {
                status: true,
                urlAvatar: result,
