@@ -61,6 +61,7 @@ const typeDefs = gql`
           login(input: LoginInput): Token
      # Para actualizar el avatar del usuario
           updateAvatar(file: Upload): UpdateAvatar #FileUpload ya esta definido en gql pero hay que traerlo
+          deleteAvatar: Boolean
      }
 `;
 

@@ -15,6 +15,7 @@ const resolvers = {
           login: (_, { input }) => userController.login(input),
           // ctx -> Objeto user
           updateAvatar: (_, { file }, ctx) => userController.updateAvatar(file, ctx),
+          deleteAvatar: (_, { }, ctx) => userController.deleteAvatar(ctx),
      },
 
 };
