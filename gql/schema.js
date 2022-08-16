@@ -48,6 +48,16 @@ const typeDefs = gql`
           password: String!
      }
 
+     # Se agrega name e email para que pueda hacer todas las actualizaciones que estamos requiriendo
+     type UserUpdateInput {
+          name: String
+          email: String
+          currentPassword: String
+          newPassword: String
+          siteWeb: String
+          description: String
+     }
+
      # QUERIES Y MUTATIONS
 
      type Query {
@@ -62,6 +72,7 @@ const typeDefs = gql`
      # Para actualizar el avatar del usuario
           updateAvatar(file: Upload): UpdateAvatar #FileUpload ya esta definido en gql pero hay que traerlo
           deleteAvatar: Boolean
+          updateUser(input: UserUpdateInput): Boolean # true en caso de una actualizacion correcta y false en caso de cualquier tipo de error
      }
 `;
 
