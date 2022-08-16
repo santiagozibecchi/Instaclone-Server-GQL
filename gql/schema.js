@@ -49,7 +49,7 @@ const typeDefs = gql`
      }
 
      # Se agrega name e email para que pueda hacer todas las actualizaciones que estamos requiriendo
-     type UserUpdateInput {
+     input UserUpdateInput {
           name: String
           email: String
           currentPassword: String

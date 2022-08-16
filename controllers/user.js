@@ -136,10 +136,41 @@ async function deleteAvatar(ctx) {
 
 }
 
+async function updateUser(input, ctx) {
+
+     const { id } = ctx.user
+
+     try {
+
+          if (input.currentPassword && input.newPassword) {
+               // Cambiar password 
+
+               const userFound = await User.findById(id);
+               const passwordSuccess = await bcryptjs.compare(
+                    input.currentPassword, /* passwod que ingresa el cliente */
+                    userFound.password /* password encriptada en la base de datos */
+               );
+
+               console.log(userFound)
+               console.log(passwordSuccess);
+
+          } else {
+               await User.findByIdAndUpdate(id, input);
+          }
+
+          return true;
+
+     } catch (error) {
+          console.log(error);
+          return false;
+     }
+}
+
 module.exports = {
      register,
      getUser,
      login,
      updateAvatar,
      deleteAvatar,
+     updateUser,
 };
