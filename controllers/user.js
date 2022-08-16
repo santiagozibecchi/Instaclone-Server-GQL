@@ -138,7 +138,7 @@ async function deleteAvatar(ctx) {
 
 async function updateUser(input, ctx) {
 
-     const { id } = ctx.user
+     const { id } = ctx.user;
 
      try {
 
@@ -151,8 +151,15 @@ async function updateUser(input, ctx) {
                     userFound.password /* password encriptada en la base de datos */
                );
 
-               console.log(userFound)
-               console.log(passwordSuccess);
+               if (!passwordSuccess) throw new Error('Contraseña incorrecta');
+
+               // Generar nueva password encriptada y guardar en DB:
+               const salt = await bcryptjs.genSaltSync(10);
+               const newPasswordCrypt = await bcryptjs.hash(input.newPassword, salt);
+
+               console.log(newPasswordCrypt);
+
+               await User.findByIdAndUpdate(id, { password: newPasswordCrypt });
 
           } else {
                await User.findByIdAndUpdate(id, input);
