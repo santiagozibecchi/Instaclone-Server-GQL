@@ -6,7 +6,8 @@ const resolvers = {
 
      Query: {
           // User
-          getUser: (_, { id, username }) => userController.getUser(id, username)
+          getUser: (_, { id, username }) => userController.getUser(id, username),
+          search: (_, { search }) => userController.search(search),
      },
 
      Mutation: {
@@ -16,7 +17,7 @@ const resolvers = {
           // ctx -> Objeto user
           updateAvatar: (_, { file }, ctx) => userController.updateAvatar(file, ctx),
           deleteAvatar: (_, { }, ctx) => userController.deleteAvatar(ctx),
-          updateUser: (_, { input }, ctx) => userController.updateUser(input, ctx)
+          updateUser: (_, { input }, ctx) => userController.updateUser(input, ctx),
      },
 
 };

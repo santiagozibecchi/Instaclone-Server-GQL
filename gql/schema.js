@@ -63,6 +63,7 @@ const typeDefs = gql`
      type Query {
           # User 
           getUser(id: ID, username: String): User
+          search(search: String): [User] #Devuelve un array de usuarios
      }
 
      type Mutation {
