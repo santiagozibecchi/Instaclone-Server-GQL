@@ -64,6 +64,9 @@ const typeDefs = gql`
           # User 
           getUser(id: ID, username: String): User
           search(search: String): [User] #Devuelve un array de usuarios
+
+          # Follow
+          isFollow(username: String!): Boolean
      }
 
      type Mutation {
