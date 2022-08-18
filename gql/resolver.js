@@ -1,5 +1,6 @@
-const userController = require('../controllers/user');
 const GraphQLUpload = require('graphql-upload/GraphQLUpload.js');
+const userController = require('../controllers/user');
+const followController = require('../controllers/follow');
 
 const resolvers = {
      Upload: GraphQLUpload,
@@ -18,6 +19,9 @@ const resolvers = {
           updateAvatar: (_, { file }, ctx) => userController.updateAvatar(file, ctx),
           deleteAvatar: (_, { }, ctx) => userController.deleteAvatar(ctx),
           updateUser: (_, { input }, ctx) => userController.updateUser(input, ctx),
+
+          // Follow
+          follow: (_, { username }, ctx) => followController.follow(username, ctx),
      },
 
 };
