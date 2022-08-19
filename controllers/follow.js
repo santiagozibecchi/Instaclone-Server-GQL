@@ -1,73 +1,88 @@
-const Follow = require('../models/follow');
-const User = require('../models/user');
+const Follow = require("../models/follow");
+const User = require("../models/user");
 
 // Mutation
 async function follow(username, ctx) {
+   // console.log(username) => Usuario que vamos a seguir
+   // console.log(ctx) => Usuario que lo va a seguir
 
-     // console.log(username) => Usuario que vamos a seguir
-     // console.log(ctx) => Usuario que lo va a seguir
+   // Comprobamos que el usuario exista
+   const userFound = await User.findOne({
+      username,
+   }); /* Devuelve el objeto usuario con todos los datos de la db */
+   if (!userFound) throw new Error("Usuario no encontrado");
 
-     // Comprobamos que el usuario exista
-     const userFound = await User.findOne({ username }); /* Devuelve el objeto usuario con todos los datos de la db */
-     if (!userFound) throw new Error('Usuario no encontrado');
+   try {
+      const follow = new Follow({
+         idUser: ctx.user.id,
+         follow: userFound._id,
+      });
 
-     try {
-
-          const follow = new Follow({
-               idUser: ctx.user.id,
-               follow: userFound._id
-          });
-
-          follow.save();
-          return true;
-
-     } catch (error) {
-          console.log(error);
-          return false;
-     }
+      follow.save();
+      return true;
+   } catch (error) {
+      console.log(error);
+      return false;
+   }
 }
 
 async function unFollow(username, ctx) {
+   const userFound = await User.findOne({ username });
+   // Si existe el usuario entre los que estamos siguiendo
+   const follow = await Follow.deleteOne({ idUser: ctx.user.id })
+      .where("follow")
+      .equals(userFound._id);
 
-     const userFound = await User.findOne({username});
-     // Si existe el usuario entre los que estamos siguiendo
-     const follow = await Follow.deleteOne({idUser: ctx.user.id})
-          .where('follow')
-          .equals(userFound._id)
+   console.log(follow);
 
-     console.log(follow)
+   if (follow.deletedCount > 0) {
+      return true;
+   }
 
-     if (follow.deletedCount > 0) {
-          return true;
-     }
-
-     return false;
+   return false;
 }
 
 // Query
 async function isFollow(username, ctx) {
+   const userFound = await User.findOne({ username });
+   if (!userFound) throw new Error("Usuario no encontrado");
 
-     const userFound = await User.findOne({ username });
-     if (!userFound) throw new Error('Usuario no encontrado');
+   // Buscamos si estamos siguiendo al usuario
+   const follow = await Follow.find({ idUser: ctx.user.id })
+      .where("follow")
+      .equals(userFound._id);
 
-     // Buscamos si estamos siguiendo al usuario 
-     const follow = await Follow.find({ idUser: ctx.user.id })
-          .where('follow')
-          .equals(userFound._id);
+   console.log(follow);
 
-     console.log(follow);
+   if (follow.length > 0) {
+      return true;
+   }
 
-     if (follow.length > 0) {
-          return true
-     }
+   return false;
+}
 
-     return false;
+async function getFollowers(username) {
+   // usuario seleccionado o que quiero saber sus seguidores
+   const user = await User.findOne({ username });
+
+   const followers = await Follow.find({
+      follow: user._id,
+   }) /* Esto extrae el usuario con todas las propiedades */
+      .populate("idUser");
+
+   const followersList = [];
+
+   // for asincrono => espera a que el for termine para ejecutar
+   for await (const data of followers) {
+      followersList.push(data.idUser);
+   }
+
+   return followersList;
 }
 
 module.exports = {
-     follow,
-     isFollow,
-     unFollow,
-}
-
-
+   follow,
+   isFollow,
+   unFollow,
+   getFollowers,
+};

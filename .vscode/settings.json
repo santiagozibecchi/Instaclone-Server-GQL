@@ -5,5 +5,6 @@
    "editor.tabSize": 3,
    "editor.fontSize": 14,
    "editor.fontLigatures": true,
-   "editor.fontFamily": "JetBrains Mono, monospace"
+   "editor.fontFamily": "JetBrains Mono, monospace",
+   "prettier.tabWidth": 3
 }
