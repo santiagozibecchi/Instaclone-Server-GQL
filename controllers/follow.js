@@ -27,6 +27,23 @@ async function follow(username, ctx) {
      }
 }
 
+async function unFollow(username, ctx) {
+
+     const userFound = await User.findOne({username});
+     // Si existe el usuario entre los que estamos siguiendo
+     const follow = await Follow.deleteOne({idUser: ctx.user.id})
+          .where('follow')
+          .equals(userFound._id)
+
+     console.log(follow)
+
+     if (follow.deletedCount > 0) {
+          return true;
+     }
+
+     return false;
+}
+
 // Query
 async function isFollow(username, ctx) {
 
@@ -50,4 +67,5 @@ async function isFollow(username, ctx) {
 module.exports = {
      follow,
      isFollow,
+     unFollow,
 }
