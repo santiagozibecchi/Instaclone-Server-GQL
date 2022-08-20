@@ -66,7 +66,8 @@ async function getFollowers(username) {
    const user = await User.findOne({ username });
 
    const followers = await Follow.find({
-      follow: user._id,
+      follow:
+         user._id /* para obtener todos los usuario que  me estan siguiendo */,
    }) /* Esto extrae el usuario con todas las propiedades */
       .populate("idUser");
 
@@ -80,9 +81,33 @@ async function getFollowers(username) {
    return followersList;
 }
 
+async function getFolloweds(username) {
+   const user = await User.findOne({ username });
+
+   // El resultado es un array
+   const followeds = await Follow.find({
+      // Que me devuelva todos los registros que tengas en Follow donde
+      // el idUser sea exactamente igual al user que seleccionamos entre los seguidos
+      idUser: user._id /* el ID de mi usuario */,
+   }).populate(
+      "follow"
+   ); /* para obtener todos los datos del usuario al que sigo */
+
+   console.log(followeds);
+
+   const followedsList = [];
+
+   for await (const data of followeds) {
+      followedsList.push(data.follow);
+   }
+
+   return followedsList;
+}
+
 module.exports = {
    follow,
    isFollow,
    unFollow,
    getFollowers,
+   getFolloweds,
 };

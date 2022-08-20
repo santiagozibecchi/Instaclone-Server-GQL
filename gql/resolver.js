@@ -11,8 +11,12 @@ const resolvers = {
       search: (_, { search }) => userController.search(search),
 
       // Follow
-      isFollow: (_, { username }, ctx) => followController.isFollow(username, ctx),
-      getFollowers: (_, {username}) => followController.getFollowers(username)
+      isFollow: (_, { username }, ctx) =>
+         followController.isFollow(username, ctx),
+      getFollowers: (_, { username }) =>
+         followController.getFollowers(username),
+      getFolloweds: (_, { username }) =>
+         followController.getFolloweds(username),
    },
 
    Mutation: {
