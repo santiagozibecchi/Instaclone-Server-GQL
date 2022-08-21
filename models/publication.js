@@ -25,4 +25,4 @@ const PublicationSchema = Schema({
    },
 });
 
-module.export = mongoose.model("Publication", PublicationSchema);
+module.exports = mongoose.model("Publication", PublicationSchema);
