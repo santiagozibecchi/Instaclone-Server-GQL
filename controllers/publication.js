@@ -1,7 +1,7 @@
 const Publication = require("../models/publication");
 
 function publish(file, ctx) {
-   console.log(publicando);
+   console.log('publicando');
    return null;
 }
 

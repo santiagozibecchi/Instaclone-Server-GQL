@@ -33,7 +33,7 @@ async function unFollow(username, ctx) {
       .where("follow")
       .equals(userFound._id);
 
-   console.log(follow);
+   // console.log(follow);
 
    if (follow.deletedCount > 0) {
       return true;
@@ -52,7 +52,7 @@ async function isFollow(username, ctx) {
       .where("follow")
       .equals(userFound._id);
 
-   console.log(follow);
+   // console.log(follow);
 
    if (follow.length > 0) {
       return true;
@@ -93,7 +93,7 @@ async function getFolloweds(username) {
       "follow"
    ); /* para obtener todos los datos del usuario al que sigo */
 
-   console.log(followeds);
+   // console.log(followeds);
 
    const followedsList = [];
 
