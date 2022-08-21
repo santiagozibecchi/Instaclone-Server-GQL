@@ -1,6 +1,7 @@
 const GraphQLUpload = require("graphql-upload/GraphQLUpload.js");
 const userController = require("../controllers/user");
 const followController = require("../controllers/follow");
+const publicationController = require('../controllers/publication');
 
 const resolvers = {
    Upload: GraphQLUpload,
@@ -33,7 +34,10 @@ const resolvers = {
       follow: (_, { username }, ctx) => followController.follow(username, ctx),
       unFollow: (_, { username }, ctx) =>
          followController.unFollow(username, ctx),
-   },
+     
+      // Publication
+      publish: (_, {file}, ctx) => publicationController.publish(file, ctx),
+      },
 };
 
 module.exports = resolvers;

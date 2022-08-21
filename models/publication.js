@@ -20,7 +20,7 @@ const PublicationSchema = Schema({
       trim: true,
    },
    createAt: {
-      type: Data,
+      type: Date,
       default: Date.now(),
    },
 });
