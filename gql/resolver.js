@@ -18,6 +18,9 @@ const resolvers = {
          followController.getFollowers(username),
       getFolloweds: (_, { username }) =>
          followController.getFolloweds(username),
+
+      // Publications
+      getPublications: (_, {username}) => publicationController.getPublications(username),
    },
 
    Mutation: {

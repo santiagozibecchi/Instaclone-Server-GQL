@@ -37,6 +37,14 @@ const typeDefs = gql`
       urlFile: String # url que se va a generar en aws S3
    }
 
+   type Publication {
+      id: ID # id de la publicacion
+      idUser: ID # id del usuario que ha publicado
+      file: String
+      typeFile: String
+      createAt: String
+   }
+
    # Siempre se intenta poder el tipo y despues en input para saber lo que le vamos a mandar
    # Datos que queremos que nos lleguen para poder realizar dicha accion
 
@@ -72,6 +80,10 @@ const typeDefs = gql`
       isFollow(username: String!): Boolean
       getFollowers(username: String!): [User] # obtener seguidores
       getFolloweds(username: String!): [User] # obtener seguidos
+
+      # ------------------ Publication ------------------ 
+      getPublications(username: String!): [Publication]
+
    }
 
    type Mutation {

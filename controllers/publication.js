@@ -1,6 +1,7 @@
 const Publication = require("../models/publication");
 const awsUploadImage = require("../utils/aws-upload-image");
 const { v4: uuidv4 } = require("uuid");
+const User = require("../models/user");
 
 async function publish(file, ctx) {
    // Subir a aws y luego guardar el regisstro en la DB
@@ -39,6 +40,25 @@ async function publish(file, ctx) {
    return null;
 }
 
+async function getPublications(username) {
+   const user = await User.findOne({
+      username,
+   }); /* Devuelve los datos del usuario que mandamos */
+   if (!user) throw new Error("Usuario no encontrado");
+
+   // constante para guardar todas las publicaciones del usuario
+   const publications = await Publication.find()
+      .where({ idUser: user._id })
+      .sort({ createAt: -1 });
+   // where => Trear todas las publicaciones que tenga como idUser
+   // el id del usuario que estamos pasando
+   // sort => filtra por la propiedad createAd y ordena de 
+   // manera que la primera publi sea la mas actual y la mas vieja
+
+   return publications;
+}
+
 module.exports = {
    publish,
+   getPublications,
 };
