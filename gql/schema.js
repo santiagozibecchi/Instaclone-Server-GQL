@@ -47,7 +47,7 @@ const typeDefs = gql`
 
    type Comment {
       idPublication: ID
-      idUser: ID
+      idUser: User
       comment: String
       createAt: String
    }
@@ -85,15 +85,19 @@ const typeDefs = gql`
    # QUERIES Y MUTATIONS
 
    type Query {
-      # ------------------ User ------------------
+      # ------------------ User -----------------------
       getUser(id: ID, username: String): User
+
       search(search: String): [User] #Devuelve un array de usuarios
-      # ------------------ Follow ------------------
+      # ------------------ Follow ----------------------
       isFollow(username: String!): Boolean
       getFollowers(username: String!): [User] # obtener seguidores
       getFolloweds(username: String!): [User] # obtener seguidos
-      # ------------------ Publication ------------------
+
+      # ------------------ Publication -----------------
       getPublications(username: String!): [Publication]
+      # ------------------ Comment ---------------------
+      getComments(idPublication: ID!): [Comment]
    }
 
    type Mutation {
