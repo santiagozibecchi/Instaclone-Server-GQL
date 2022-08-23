@@ -45,6 +45,13 @@ const typeDefs = gql`
       createAt: String
    }
 
+   type Comment {
+      idPublication: ID
+      idUser: ID
+      comment: String
+      createAt: String
+   }
+
    # Siempre se intenta poder el tipo y despues en input para saber lo que le vamos a mandar
    # Datos que queremos que nos lleguen para poder realizar dicha accion
 
@@ -70,20 +77,23 @@ const typeDefs = gql`
       description: String
    }
 
+   input CommentInput {
+      idPublication: ID
+      comment: String
+   }
+
    # QUERIES Y MUTATIONS
 
    type Query {
-      # ------------------ User ------------------ 
+      # ------------------ User ------------------
       getUser(id: ID, username: String): User
       search(search: String): [User] #Devuelve un array de usuarios
-      # ------------------ Follow ------------------ 
+      # ------------------ Follow ------------------
       isFollow(username: String!): Boolean
       getFollowers(username: String!): [User] # obtener seguidores
       getFolloweds(username: String!): [User] # obtener seguidos
-
-      # ------------------ Publication ------------------ 
+      # ------------------ Publication ------------------
       getPublications(username: String!): [Publication]
-
    }
 
    type Mutation {
@@ -93,11 +103,15 @@ const typeDefs = gql`
       updateAvatar(file: Upload): UpdateAvatar #FileUpload ya esta definido en gql pero hay que traerlo
       deleteAvatar: Boolean
       updateUser(input: UserUpdateInput): Boolean # true en caso de una actualizacion correcta y false en caso de cualquier tipo de error
-      # ------------------ Follow ------------------
+      # ------------------ Follow -----------------
       follow(username: String!): Boolean
       unFollow(username: String!): Boolean
-      # ------------------ Publication ------------------
+
+      # ------------------ Publication -------------
       publish(file: Upload): Publish
+
+      # ------------------ Comment -----------------
+      addComment(input: CommentInput): Comment
    }
 `;
 
