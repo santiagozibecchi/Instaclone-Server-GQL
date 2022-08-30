@@ -30,7 +30,10 @@ const resolvers = {
          commentController.getComments(idPublication),
 
       // Likes
-      isLike: (_, {idPublication}, ctx) => likeController.isLike(idPublication, ctx),
+      isLike: (_, { idPublication }, ctx) =>
+         likeController.isLike(idPublication, ctx),
+      countLikes: (_, { idPublication }) =>
+         likeController.countLikes(idPublication),
    },
 
    Mutation: {

@@ -102,6 +102,7 @@ const typeDefs = gql`
 
       # ------------------ Likes ---------------------
       isLike(idPublication: ID!): Boolean # Para comprobar si un usuario ha dado like a una publicacion
+      countLikes(idPublication: ID!): Int
    }
 
    type Mutation {
