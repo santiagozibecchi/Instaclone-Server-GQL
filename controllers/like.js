@@ -19,6 +19,24 @@ async function addLike(idPublication, ctx) {
    }
 }
 
+async function deleteLike(idPublication, ctx) {
+   try {
+      // * Para borrar el like de la publicacion y que solo sea del usuario
+      // * que anteriormente puso like
+      await Like.findOneAndDelete({ idPublication }).where({
+         idUser: ctx.user.id,
+      }); /* donde el idUser y el que dio su like previamente,
+         de esta manera evitamos eliminar todos los like del post
+      */
+
+      return true;
+   } catch (error) {
+      console.log(error);
+      return false;
+   }
+}
+
 module.exports = {
    addLike,
+   deleteLike,
 };
