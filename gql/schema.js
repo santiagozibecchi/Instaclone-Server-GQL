@@ -94,9 +94,14 @@ const typeDefs = gql`
       getFollowers(username: String!): [User] # obtener seguidores
       getFolloweds(username: String!): [User] # obtener seguidos
       # ------------------ Publication -----------------
+
       getPublications(username: String!): [Publication]
+
       # ------------------ Comment ---------------------
       getComments(idPublication: ID!): [Comment]
+
+      # ------------------ Likes ---------------------
+      isLike(idPublication: ID!): Boolean # Para comprobar si un usuario ha dado like a una publicacion
    }
 
    type Mutation {

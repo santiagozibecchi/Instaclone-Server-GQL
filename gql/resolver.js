@@ -28,6 +28,9 @@ const resolvers = {
       // Comment
       getComments: (_, { idPublication }) =>
          commentController.getComments(idPublication),
+
+      // Likes
+      isLike: (_, {idPublication}, ctx) => likeController.isLike(idPublication, ctx),
    },
 
    Mutation: {
