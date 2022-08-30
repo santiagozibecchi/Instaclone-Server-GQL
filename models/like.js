@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const LikeSchema = Schema({
-   // * Para guardar el id de la publicacion a la que se ha 
+   // * Para guardar el id de la publicacion a la que se ha
    // * hecho el like
    idPublication: {
       type: mongoose.Schema.Types.ObjectId,

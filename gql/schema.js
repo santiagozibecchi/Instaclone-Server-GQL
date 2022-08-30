@@ -93,7 +93,6 @@ const typeDefs = gql`
       isFollow(username: String!): Boolean
       getFollowers(username: String!): [User] # obtener seguidores
       getFolloweds(username: String!): [User] # obtener seguidos
-
       # ------------------ Publication -----------------
       getPublications(username: String!): [Publication]
       # ------------------ Comment ---------------------
@@ -116,6 +115,9 @@ const typeDefs = gql`
 
       # ------------------ Comment -----------------
       addComment(input: CommentInput): Comment
+
+      # ------------------ Likes -----------------
+      addLike(idPublication: ID!): Boolean
    }
 `;
 

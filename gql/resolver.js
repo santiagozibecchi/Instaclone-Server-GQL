@@ -3,6 +3,7 @@ const userController = require("../controllers/user");
 const followController = require("../controllers/follow");
 const publicationController = require("../controllers/publication");
 const commentController = require("../controllers/comment");
+const likeController = require("../controllers/like");
 
 const resolvers = {
    Upload: GraphQLUpload,
@@ -50,6 +51,10 @@ const resolvers = {
       // Comment
       addComment: (_, { input }, ctx) =>
          commentController.addComment(input, ctx),
+
+      // Likes
+      addLike: (_, { idPublication }, ctx) =>
+         likeController.addLike(idPublication, ctx),
    },
 };
 
