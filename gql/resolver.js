@@ -21,9 +21,17 @@ const resolvers = {
       getFolloweds: (_, { username }) =>
          followController.getFolloweds(username),
 
-      // Publications
+      // * Publications
       getPublications: (_, { username }) =>
          publicationController.getPublications(username),
+      getPublicationsFolloweds: (
+         _,
+         {},
+         ctx /* ctx para sacar el id del usuario que esta haciendo la peticion
+            y poder sacar todos los usuarios que sigue y luego obtener todas las 
+            publicacion que tienen
+         */
+      ) => publicationController.getPublicationsFolloweds(ctx),
 
       // Comment
       getComments: (_, { idPublication }) =>
