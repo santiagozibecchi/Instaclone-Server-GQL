@@ -72,7 +72,7 @@ async function getPublicationsFolloweds(ctx) {
    for await (const data of followeds) {
       followedsList.push(data.follow);
    }
-   console.log(followedsList);
+   // console.log(followedsList);
 
    // 3. Obtener las listas de todos nuestros usuarios
    const publicationList = [];

@@ -101,6 +101,8 @@ const typeDefs = gql`
       isFollow(username: String!): Boolean
       getFollowers(username: String!): [User] # obtener seguidores
       getFolloweds(username: String!): [User] # obtener seguidos
+      getNotFolloweds: [User]
+
       # ------------------ Publication -----------------
       getPublications(username: String!): [Publication]
       getPublicationsFolloweds: [FeedPublication]
